@@ -3,5 +3,5 @@
 Initialize your project using template, f.e:
 
 ```shell
-nix flake new -t "github:onjinx/nix-flake-templates#python-shell" my-python-project
+nix flake new -t "github:onjin/nix-flake-templates#python-shell" my-python-project
 ```
