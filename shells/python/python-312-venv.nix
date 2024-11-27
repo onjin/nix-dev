@@ -23,7 +23,10 @@ in pkgs.mkShell {
     # Create local venv
     VENV=$PWD/.venv
     if test ! -d $VENV; then
-      virtualenv $VENV
+      ${pythonEnv}/bin/virtualenv $VENV
+      echo "$VENV created with python $($VENV/bin/python --version)"
+    else
+      echo "$VENV already exists with python $($VENV/bin/python --version)"
     fi
     source $VENV/bin/activate
     export PYTHONPATH=$VENV/${pythonEnv.sitePackages}/:$PYTHONPATH

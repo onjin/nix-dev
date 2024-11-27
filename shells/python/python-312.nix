@@ -1,7 +1,6 @@
+
 { pkgs ? import <nixpkgs> { } }:
 let
-
-  # set your python version here
   pythonPkg = pkgs.python312;
   pythonEnv = pythonPkg.withPackages (pythonPkgs:
     with pythonPkgs; [
@@ -10,8 +9,8 @@ let
       # add nix python packages to install with python
     ]);
   lib-path = with pkgs; lib.makeLibraryPath [ libffi openssl stdenv.cc.cc ];
-
 in pkgs.mkShell {
+  name = "python-312";
   packages = [ pkgs.bashInteractive ];
   buildInputs = with pkgs; [ pythonEnv ];
   shellHook = ''
@@ -21,17 +20,5 @@ in pkgs.mkShell {
 
     # Augment the dynamic linker path
     export "LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${lib-path}"
-
-    # Create local venv
-    VENV=$PWD/.venv
-    if test ! -d $VENV; then
-      ${pythonEnv}/bin/virtualenv $VENV
-      echo "$VENV created with python $($VENV/bin/python --version)"
-    else
-      echo "$VENV already exists with python $($VENV/bin/python --version)"
-    fi
-    source $VENV/bin/activate
-    export PYTHONPATH=$VENV/${pythonEnv.sitePackages}/:$PYTHONPATH
-    export PATH=$VENV/bin:$PATH
   '';
 }

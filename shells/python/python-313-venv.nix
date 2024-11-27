@@ -1,8 +1,7 @@
+
 { pkgs ? import <nixpkgs> { } }:
 let
-
-  # set your python version here
-  pythonPkg = pkgs.python312;
+  pythonPkg = pkgs.python313;
   pythonEnv = pythonPkg.withPackages (pythonPkgs:
     with pythonPkgs; [
       pip
@@ -10,8 +9,8 @@ let
       # add nix python packages to install with python
     ]);
   lib-path = with pkgs; lib.makeLibraryPath [ libffi openssl stdenv.cc.cc ];
-
 in pkgs.mkShell {
+  name = "python-313-venv";
   packages = [ pkgs.bashInteractive ];
   buildInputs = with pkgs; [ pythonEnv ];
   shellHook = ''
