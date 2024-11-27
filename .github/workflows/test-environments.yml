@@ -1,0 +1,29 @@
+name: Test Flake Environments
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+
+jobs:
+  test-envs:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Install Nix
+      uses: DeterminateSystems/nix-installer-action@v2
+      with:
+        install-url: https://nixos.org
+
+    - name: Install Dependencies
+      run: |
+        nix-env -iA nixpkgs.jq
+
+    - name: Test Flake Environments
+      run: |
+        ./test-flake-envs.sh
+
