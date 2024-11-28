@@ -24,6 +24,13 @@ cd nix-dev
 nix develop .#python-312-venv
 ```
 
+Integrate with https://direnv.net/:
+
+```shell
+$ cat .envrc 
+use flake github:onjin/nix-dev#terraform-lsp
+```
+
 ## Flake Templates
 
 To initialize your project using template run:
