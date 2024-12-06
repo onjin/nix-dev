@@ -1,4 +1,10 @@
-{ pkgs, lib-path ? null, pythonEnv ? null }: {
+{ pkgs, lib-path ? null, pythonEnv ? null }:
+let
+  # Read environment variables for remote usage
+  venvDir = builtins.getEnv "NIX_DEV_PYTHON_VENVDIR";
+  requirements = builtins.getEnv "NIX_DEV_PYTHON_REQUIREMENTS";
+  requirementsTxt = builtins.getEnv "NIX_DEV_PYTHON_REQUIREMENTS_TXT";
+in {
   libPathHook = ''
     if [ ! -z "${lib-path}" ]; then
       # Augment the dynamic linker path
@@ -12,11 +18,10 @@
   venvHook = ''
     SOURCE_DATE_EPOCH=$(date +%s)
 
-    # venv directory parameter
-    VENVDIR=$NIX_DEV_PYTHON_VENVDIR
-
-    if [ -z $VENVDIR ]; then
+    if [ -z ${venvDir} ]; then
       VENVDIR="./.venv"
+    else
+      VENVDIR="${venvDir}"
     fi
 
     if [ -d "$VENVDIR" ]; then
@@ -44,13 +49,14 @@
 
   envRequirementsHook = ''
     # Install packages defined in env variable
-    if [ ! -z "$NIX_DEV_PYTHON_REQUIREMENTS" ]; then
-      echo "[nix-dev] Installing packages from NIX_DEV_PYTHON_REQUIREMENTS=$NIX_DEV_PYTHON_REQUIREMENTS"
-      $VENVDIR/bin/pip install $NIX_DEV_PYTHON_REQUIREMENTS
+    if [ ! -z "${requirements}" ]; then
+      echo "[nix-dev] Installing packages from NIX_DEV_PYTHON_REQUIREMENTS=${requirements}"
+      $VENVDIR/bin/pip install ${requirements}
     fi
-    if [ ! -z "$NIX_DEV_PYTHON_REQUIREMENTS_TXT" ]; then
-      echo "[nix-dev] Installing packages from NIX_DEV_PYTHON_REQUIREMENTS_TXT=$NIX_DEV_PYTHON_REQUIREMENTS_TXT"
-      $VENVDIR/bin/pip install -r $NIX_DEV_PYTHON_REQUIREMENTS_TXT
+
+    if [ ! -z "${requirementsTxt}" ]; then
+      echo "[nix-dev] Installing packages from NIX_DEV_PYTHON_REQUIREMENTS_TXT=${requirementsTxt}"
+      $VENVDIR/bin/pip install -r ${requirementsTxt}
     fi
   '';
 
