@@ -48,16 +48,20 @@
 
             # python
             python = import ./shells/python/python-312.nix { inherit pkgs; };
-            python-313 =
-              import ./shells/python/python-313.nix { inherit pkgs; };
+            python-311 =
+              import ./shells/python/python-311.nix { inherit pkgs; };
+            python-311-venv =
+              import ./shells/python/python-311-venv.nix { inherit pkgs; };
             python-312 =
               import ./shells/python/python-312.nix { inherit pkgs; };
+            python-312-venv =
+              import ./shells/python/python-312-venv.nix { inherit pkgs; };
+            python-313 =
+              import ./shells/python/python-313.nix { inherit pkgs; };
             python-venv =
               import ./shells/python/python-312-venv.nix { inherit pkgs; };
             python-313-venv =
               import ./shells/python/python-313-venv.nix { inherit pkgs; };
-            python-312-venv =
-              import ./shells/python/python-312-venv.nix { inherit pkgs; };
 
             # rust
             rust = import ./shells/rust/stable.nix { inherit pkgs; };
