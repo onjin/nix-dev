@@ -1,12 +1,12 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> { } }:
 
 pkgs.mkShell {
   name = "jdk-23";
 
   buildInputs = [
-    pkgs.jdk23                # Java 23 JDK
-    pkgs.gradle               # Gradle build tool
-    pkgs.lombok               # Lombok annotation processor
+    pkgs.jdk23 # Java 23 JDK
+    pkgs.gradle # Gradle build tool
+    pkgs.lombok # Lombok annotation processor
   ];
 
   # Optionally set environment variables to improve the dev experience

@@ -1,1 +1,1 @@
-{ pkgs }: pkgs.mkShell { buildInputs = [ pkgs.jq ]; }
+{ pkgs }: pkgs.mkShell { buildInputs = with pkgs; [ nixfmt jq ]; }

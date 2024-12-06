@@ -1,11 +1,9 @@
-{ pkgs ? import <nixpkgs> {} }:
+{ pkgs ? import <nixpkgs> { } }:
 
 pkgs.mkShell {
   name = "rust-beta";
 
-  buildInputs = with pkgs; [
-    rust-bin.beta.latest.default
-  ];
+  buildInputs = with pkgs; [ rust-bin.beta.latest.default ];
 
   # Optionally set environment variables to improve the dev experience
   shellHook = ''
