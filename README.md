@@ -15,6 +15,11 @@ To use the shells from remote run:
 nix develop "github:onjin/nix-dev#python-312-venv"
 ```
 
+**Python flakes' environment variables**:
+
+- `NIX_DEV_PYTHON_VENVDIR=~/.local/share/myenv` - overwrite `./.venv` default for `...-env` python flakes
+- `NIX_DEV_PYTHON_REQUIREMENTS_TXT=requirements.txt` - run `pip install -r ...` for file name set as variable
+- `NIX_DEV_PYTHON_REQUIREMENTS="uv anyio"` - run `pip install ...` for list of packages
 
 Or clone repository and use from path:
 
@@ -28,7 +33,10 @@ Integrate with https://direnv.net/:
 
 ```shell
 $ cat .envrc 
-use flake github:onjin/nix-dev#terraform-lsp
+export NIX_DEV_PYTHON_VENVDIR=~/.local/share/myenv
+export NIX_DEV_PYTHON_REQUIREMENTS_TXT=requirements.txt
+export NIX_DEV_PYTHON_REQUIREMENTS="uv anyio"
+use flake github:onjin/nix-dev#python-313-venv
 ```
 
 ## Flake Templates
