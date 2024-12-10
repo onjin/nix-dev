@@ -41,6 +41,8 @@ export NIX_DEV_PYTHON_REQUIREMENTS="uv anyio"
 use flake github:onjin/nix-dev#python-313-venv --impure
 ```
 
+You can combine multiple environment, i.e. `python` + `nodejs` adding two `use flake ...` lines or running `nix flake ...` twice. Or more :)
+
 ## Flake Templates
 
 To initialize your project using template run:

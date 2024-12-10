@@ -46,6 +46,17 @@
             java-17 = import ./shells/java/jdk17.nix { inherit pkgs; };
             java-11 = import ./shells/java/jdk11.nix { inherit pkgs; };
 
+            # javascript
+            nodejs = import ./shells/javascript/nodejs-22.nix { inherit pkgs; };
+            nodejs-23 =
+              import ./shells/javascript/nodejs-23.nix { inherit pkgs; };
+            nodejs-22 =
+              import ./shells/javascript/nodejs-22.nix { inherit pkgs; };
+            nodejs-20 =
+              import ./shells/javascript/nodejs-20.nix { inherit pkgs; };
+            nodejs-18 =
+              import ./shells/javascript/nodejs-18.nix { inherit pkgs; };
+
             # python
             python = import ./shells/python/python-312.nix { inherit pkgs; };
             python-313 =
