@@ -3,5 +3,6 @@
 import ./rust.nix {
   inherit pkgs;
   name = "rust-beta";
-  package = pkgs.rust-bin.beta.latest.default;
+  package =
+    pkgs.rust-bin.beta.latest.default.override { extensions = [ "rust-src" ]; };
 }

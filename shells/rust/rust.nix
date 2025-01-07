@@ -11,7 +11,10 @@ pkgs.mkShell {
     pkgs.clang
     pkgs.lld
   ];
-  env = { RUST_BACKTRACE = "full"; };
+  env = {
+    RUST_BACKTRACE = "full";
+    RUST_SRC_PATH = "${package}/lib/rustlib/src/rust/library";
+  };
 
   # Optionally set environment variables to improve the dev experience
   shellHook = ''
